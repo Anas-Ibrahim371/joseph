@@ -28,46 +28,6 @@
 
     .choice {
       margin-bottom: 10px;
-      padding: 10px;<!DOCTYPE html>
-<html>
-<head>
-  <title>Joseph Card Game</title>
-  <style>
-    body {
-      display: flex; /* Create a flexible layout */
-      flex-direction: column; /* Stack elements vertically */
-      align-items: center; /* Center elements horizontally */
-      justify-content: center; /* Center elements vertically */
-      min-height: 100vh; /* Set minimum height for full viewport */
-      font-family: sans-serif; /* Default font */
-    }
-
-    .supervision-text {
-      color: black;
-      font-size: 3em; /* Large font size */
-      font-weight: bold; /* Bold text */
-      margin: 20px 0; /* Top and bottom margins */
-      text-align: center; /* Center text horizontally */
-    }
-
-    .container {
-      display: flex; /* Create a flex container for the left and right sections */
-      width: 80%; /* Adjust the width as needed */
-      margin: 20px 0;
-    }
-
-    .left-partition {
-      flex: 1; /* Take up 1/3 of the width */
-      padding: 20px;
-    }
-
-    .right-partition {
-      flex: 2; /* Take up 2/3 of the width */
-      padding: 20px;
-    }
-
-    .choice {
-      margin-bottom: 10px;
       padding: 10px;
       border: 1px solid #ccc;
       cursor: pointer;
@@ -76,18 +36,24 @@
     .choice:hover {
       background-color: #f0f0f0;
     }
+
+    .right-partition {
+      display: none; /* Initially hide the right partition */
+    }
+
+    .right-partition.active {
+      display: block; /* Show the right partition when active */
+    }
   </style>
 </head>
 <body>
   <div class="supervision-text">Under the supervision of Dr. Joseph Adel</div>
-  <div class="container">
-    <div class="left-partition">
-      <div class="choice" onclick="showCardGame()">Card Game</div>
-      <div class="choice" onclick="showMindMap()">Mind Maps</div>
-    </div>
-    <div class="right-partition" id="content">
-      <blockquote class="imgur-embed-pub" lang="en" data-id="a/3RoOnA9"><a href="//imgur.com/3RoOnA9"></a></blockquote>
-    </div>
+  <div class="left-partition">
+    <div class="choice" onclick="showCardGame()">Card Game</div>
+    <div class="choice" onclick="showMindMap()">Mind Maps</div>
+  </div>
+  <div class="right-partition" id="content">
+    <blockquote class="imgur-embed-pub" lang="en" data-id="a/3RoOnA9"><a href="//imgur.com/3RoOnA9"></a></blockquote>
   </div>
   <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
   <script>
@@ -99,6 +65,7 @@
     function showMindMap() {
       var contentDiv = document.getElementById('content');
       contentDiv.innerHTML = '<blockquote class="imgur-embed-pub" lang="en" data-id="a/3RoOnA9"><a href="//imgur.com/3RoOnA9"></a></blockquote>';
+      contentDiv.classList.add('active'); // Show the right partition
     }
   </script>
 </body>
