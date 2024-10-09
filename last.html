@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Joseph Card Game</title>
+  <style>
+    body {
+      display: flex; /* Create a flexible layout */
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center; /* Center elements horizontally */
+      justify-content: center; /* Center elements vertically */
+      min-height: 100vh; /* Set minimum height for full viewport */
+      font-family: sans-serif; /* Default font */
+    }
+
+    .supervision-text {
+      color: black;
+      font-size: 3em; /* Large font size */
+      font-weight: bold; /* Bold text */
+      margin: 20px 0; /* Top and bottom margins */
+      text-align: center; /* Center text horizontally */
+    }
+
+    .left-partition {
+      background-color: #eee; /* Light background color */
+      padding: 20px;
+      border-radius: 5px; /* Add rounded corners */
+    }
+
+    .choice {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    .choice:hover {
+      background-color: #f0f0f0;
+    }
+
+    .right-partition {
+      display: none; /* Initially hide the right partition */
+    }
+
+    .right-partition.active {
+      display: block; /* Show the right partition when active */
+    }
+  </style>
+</head>
+<body>
+  <div class="supervision-text">Under the supervision of Dr. Joseph Adel</div>
+  <div class="left-partition">
+    <div class="choice" onclick="startCardGame()">Card Game</div>
+    <div class="choice" onclick="startMindMap()">Mind Maps</div>
+  </div>
+  <div class="right-partition" id="content">
+  </div>
+  <script>
+    function startCardGame() {
+      var contentDiv = document.getElementById('content');
+
+      // Clear any existing content
+      contentDiv.innerHTML = '';
+
+      // Add the card game content
+      contentDiv.innerHTML = '<iframe title="vimeo-player" src="https://player.vimeo.com/video/1017895560?h=34cb5cb6bc" width="640" height="360" frameborder="0" allowfullscreen></iframe>';
+
+      // Add a button to stop the card game
+      var stopButton = document.createElement('button');
+      stopButton.textContent = 'Stop Card Game';
+      stopButton.classList.add('stop-button');
+      contentDiv.appendChild(stopButton);
+
+      // Add a click event listener to the stop button
+      stopButton.addEventListener('click', function() {
+        contentDiv.innerHTML = ''; // Clear the content
+      });
+    }
+
+    function startMindMap() {
+      var contentDiv = document.getElementById('content');
+
+      // Clear any existing content
+      contentDiv.innerHTML = '';
+
+      // Add the mind map image
+      contentDiv.innerHTML = '<img src="https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%201st%20mind%20map.JPG" alt="Mind Map Image">';
+    }
+  </script>
+</body>
+</html>
