@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Joseph Card Game</title>
+  <style>
+    /* ... your existing styles ... */
+  </style>
+</head>
+<body>
+  <div class="supervision-text">Under the supervision of Dr. Joseph Adel</div>
+  <div class="left-partition">
+    <div class="choice" onclick="showCardGame()">Card Game</div>
+    <div class="choice" onclick="showMindMap()">Mind Maps</div>
+  </div>
+  <div class="right-partition" id="content">
+  </div>
+  <script>
+    function showCardGame() {
+      var contentDiv = document.getElementById('content');
+
+      // Check if the content is already showing the card game
+      if (!contentDiv.classList.contains('card-game-active')) {
+        contentDiv.innerHTML = '<iframe title="vimeo-player" src="https://player.vimeo.com/video/1017895560?h=34cb5cb6bc" width="640" height="360" frameborder="0" allowfullscreen></iframe>';
+        contentDiv.classList.add('card-game-active');
+      }
+    }
+
+    function showMindMap() {
+      var contentDiv = document.getElementById('content');
+
+      // Check if the content is already showing the mind map
+      if (!contentDiv.classList.contains('mind-map-active')) {
+        contentDiv.innerHTML = '<img src="https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%201st%20mind%20map.JPG" alt="Mind Map Image">';
+        contentDiv.classList.add('mind-map-active');
+      }
+    }
+  </script>
+</body>
+</html>
