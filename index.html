@@ -96,10 +96,10 @@
     <button onclick="toggleMindMaps()">Mind Map</button>
 
     <div id="mind-map-options">
-        <button onclick="loadMindMap('https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true')">Fe Mind Map</button>
-        <button onclick="loadMindMap('https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true')">FeO Mind Map</button>
-        <button onclick="loadMindMap('https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true')">Fe3O4 Mind Map</button>
-        <button onclick="loadMindMap('https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true')">Fe2O3 Mind Map</button>
+        <button onclick="loadContent('fe-mind-map.html')">Fe Mind Map</button>
+        <button onclick="loadContent('feo-mind-map.html')">FeO Mind Map</button>
+        <button onclick="loadContent('fe3o4-mind-map.html')">Fe3O4 Mind Map</button>
+        <button onclick="loadContent('fe2o3-mind-map.html')">Fe2O3 Mind Map</button>
         <button onclick="loadContent('all-mind-maps.html')">Show All Mind Maps</button>
     </div>
 
@@ -116,49 +116,22 @@
     </div>
 
     <script>
-        let isVideoOpen = false; // متغير لتتبع ما إذا كان الفيديو مفتوحًا أم لا
-
         function loadContent(page) {
             const contentDiv = document.getElementById('content');
-            if (isVideoOpen) {
-                contentDiv.innerHTML = ''; // إفراغ المحتوى إذا كان الفيديو مفتوحًا
-                isVideoOpen = false; // تحديث حالة الفيديو
-            }
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
                     contentDiv.innerHTML = data; // وضع المحتوى المحمّل في div
                     contentDiv.style.display = 'block'; // عرض المحتوى
                     window.history.pushState({page: page}, '', page); // تحديث عنوان URL
-                    if (page === 'video.html') {
-                        isVideoOpen = true; // تحديث حالة الفيديو
-                    }
                 })
                 .catch(error => console.error('Error loading the page:', error));
-        }
-
-        function loadMindMap(url) {
-            const imgElement = document.createElement('img');
-            imgElement.src = url;
-            imgElement.onclick = function() {
-                window.open(url, '_blank'); // فتح الصورة في تبويب جديد
-            };
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = ''; // إفراغ المحتوى السابق
-            contentDiv.appendChild(imgElement); // إضافة الصورة الجديدة
-            contentDiv.style.display = 'block'; // عرض المحتوى
-            window.history.pushState({page: url}, '', url); // تحديث عنوان URL
         }
 
         // إظهار/إخفاء خيارات الخرائط الذهنية
         function toggleMindMaps() {
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
-
-            // إغلاق الفيديو إذا كان مفتوحًا
-            if (isVideoOpen) {
-                loadContent(''); // إفراغ المحتوى
-            }
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
