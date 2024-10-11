@@ -115,9 +115,9 @@
             const contentDiv = document.getElementById('content');
             const mindMapOptions = document.getElementById('mindMapOptions');
 
-            // إخفاء محتوى الفيديو إذا كان معروضاً
+            // إخفاء المحتوى الحالي
             contentDiv.style.display = 'none';
-            mindMapOptions.style.display = 'none';
+            mindMapOptions.style.display = 'none'; // إخفاء خيارات المايند مابس عند الانتقال
 
             fetch(page)
                 .then(response => response.text())
@@ -149,6 +149,11 @@
                 loadContent(event.state.page);
             }
         };
+
+        // تحديث زرار المايند مابس لتحميل الصور في تبويب جديد
+        function loadImage(imageUrl) {
+            window.open(imageUrl, '_blank'); // فتح الصورة في تبويب جديد
+        }
     </script>
 </body>
 </html>
