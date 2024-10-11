@@ -92,7 +92,7 @@
     <h1>Under supervision of Doctor Joseph Adel</h1>
     <h2>حاجة لوكس لدفعة اللوكس 2025</h2>
 
-    <button onclick="loadContent('video.html', 'Video')">Card Game</button>
+    <button id="card-game-button" onclick="loadContent('video.html', 'Video')">Card Game</button>
     <button onclick="toggleMindMaps()">Mind Map</button>
 
     <div id="mind-map-options">
@@ -116,9 +116,21 @@
     </div>
 
     <script>
+        let lastLoadedPage = '';
+
         function loadContent(page, title) {
             const contentDiv = document.getElementById('content');
+            const cardGameButton = document.getElementById('card-game-button');
+
+            // إذا كان نفس المحتوى مفتوحًا بالفعل، إخفاء المحتوى
+            if (lastLoadedPage === page) {
+                hideContent(); // إخفاء المحتوى
+                lastLoadedPage = ''; // إعادة تعيين المحتوى المفتوح
+                return;
+            }
+
             contentDiv.innerHTML = ''; // إفراغ المحتوى قبل تحميل جديد
+            hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
@@ -138,6 +150,7 @@
 
                     // تعديل الـ URL
                     window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
+                    lastLoadedPage = page; // تحديث المحتوى المفتوح
                 })
                 .catch(error => console.error('Error loading the page:', error));
         }
@@ -152,6 +165,11 @@
             const contentDiv = document.getElementById('content');
             contentDiv.style.display = 'none'; // إخفاء أي محتوى معروض
             contentDiv.innerHTML = ''; // إفراغ المحتوى
+        }
+
+        function hideMindMapOptions() {
+            const optionsDiv = document.getElementById('mind-map-options');
+            optionsDiv.style.display = 'none'; // إخفاء خيارات الخرائط الذهنية
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
