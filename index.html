@@ -118,53 +118,27 @@
     <script>
         function loadContent(page) {
             const contentDiv = document.getElementById('content');
-
-            // إيقاف الفيديو عند الانتقال إلى صفحة أخرى
-            stopVideo();
-
+            contentDiv.style.display = 'none'; // إخفاء المحتوى الحالي عند تحميل محتوى جديد
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
-                    contentDiv.innerHTML = data;
-                    contentDiv.style.display = 'block';
-
-                    // إذا كانت هناك صور في المحتوى، نلفها بعنصر <a> لفتحها في تبويب جديد
-                    const images = contentDiv.querySelectorAll('img');
-                    images.forEach(img => {
-                        const imgSrc = img.src;
-                        const link = document.createElement('a');
-                        link.href = imgSrc;
-                        link.target = '_blank'; // فتح الصورة في تبويب جديد
-                        img.parentNode.insertBefore(link, img);
-                        link.appendChild(img);
-                    });
-
-                    window.history.pushState({page: page}, '', page); // تحديث عنوان URL بعد تحميل المحتوى
+                    contentDiv.innerHTML = data; // وضع المحتوى المحمّل في div
+                    contentDiv.style.display = 'block'; // عرض المحتوى
+                    window.history.pushState({page: page}, '', page); // تحديث عنوان URL
                 })
                 .catch(error => console.error('Error loading the page:', error));
-        }
-
-        function stopVideo() {
-            const contentDiv = document.getElementById('content');
-            const iframes = contentDiv.getElementsByTagName('iframe');
-            const videos = contentDiv.getElementsByTagName('video');
-
-            if (iframes.length > 0) {
-                const iframeSrc = iframes[0].src;
-                iframes[0].src = iframeSrc; // إعادة تحميل iframe لإيقاف الفيديو
-            }
-
-            if (videos.length > 0) {
-                videos[0].pause(); // إيقاف الفيديو
-                videos[0].currentTime = 0; // إعادة تشغيل الفيديو من البداية
-                videos[0].style.display = 'none'; // إخفاء الفيديو بعد إيقافه
-            }
         }
 
         // إظهار/إخفاء خيارات الخرائط الذهنية
         function toggleMindMaps() {
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
+            hideContent(); // إخفاء المحتوى الحالي عند التبديل إلى خيارات الخرائط الذهنية
+        }
+
+        function hideContent() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.style.display = 'none'; // إخفاء أي محتوى معروض
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
