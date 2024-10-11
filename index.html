@@ -144,12 +144,21 @@
         function toggleMindMaps() {
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
+            clearContent(); // إخفاء أي محتوى معروض عند التبديل إلى خيارات الخرائط الذهنية
+        }
+
+        function clearContent() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.style.display = 'none'; // إخفاء المحتوى الحالي
+            contentDiv.innerHTML = ''; // تفريغ المحتوى
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
         window.onpopstate = function(event) {
             if (event.state) {
                 loadContent(event.state.page);
+            } else {
+                clearContent(); // تفريغ المحتوى إذا لم يكن هناك حالة
             }
         };
     </script>
