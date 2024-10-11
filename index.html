@@ -146,10 +146,18 @@
 
         function stopVideo() {
             const contentDiv = document.getElementById('content');
+            const iframes = contentDiv.getElementsByTagName('iframe');
             const videos = contentDiv.getElementsByTagName('video');
+
+            if (iframes.length > 0) {
+                const iframeSrc = iframes[0].src;
+                iframes[0].src = iframeSrc; // إعادة تحميل iframe لإيقاف الفيديو
+            }
+
             if (videos.length > 0) {
                 videos[0].pause(); // إيقاف الفيديو
                 videos[0].currentTime = 0; // إعادة تشغيل الفيديو من البداية
+                videos[0].style.display = 'none'; // إخفاء الفيديو بعد إيقافه
             }
         }
 
