@@ -116,8 +116,6 @@
     </div>
 
     <script>
-        let currentPage = ''; // متغير لتتبع الصفحة الحالية
-
         function loadContent(page) {
             const contentDiv = document.getElementById('content');
             clearContent(); // إخفاء أي محتوى قبل تحميل الجديد
@@ -138,8 +136,7 @@
                         link.appendChild(img);
                     });
 
-                    window.history.pushState({page: page}, '', page); // تحديث عنوان URL بعد تحميل المحتوى
-                    currentPage = page; // تحديث الصفحة الحالية
+                    window.history.pushState({}, '', ''); // تحديث عنوان URL إلى فارغ
                 })
                 .catch(error => console.error('Error loading the page:', error));
         }
@@ -155,17 +152,12 @@
             const contentDiv = document.getElementById('content');
             contentDiv.style.display = 'none'; // إخفاء المحتوى الحالي
             contentDiv.innerHTML = ''; // تفريغ المحتوى
-            currentPage = ''; // إعادة تعيين الصفحة الحالية
-            window.history.pushState({}, '', '/'); // إعادة تعيين الرابط إلى الرابط الأساسي
+            window.history.pushState({}, '', ''); // إعادة تعيين الرابط إلى فارغ
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
         window.onpopstate = function(event) {
-            if (event.state) {
-                loadContent(event.state.page);
-            } else {
-                clearContent(); // تفريغ المحتوى إذا لم يكن هناك حالة
-            }
+            clearContent(); // تفريغ المحتوى إذا لم يكن هناك حالة
         };
     </script>
 </body>
