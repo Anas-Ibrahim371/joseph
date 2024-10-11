@@ -112,13 +112,13 @@
         function loadContent(page, imageUrl) {
             const contentDiv = document.getElementById('content');
             
-            // استرجاع الـ HTML
+            // جلب محتوى HTML للصورة المطلوبة
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
                     contentDiv.innerHTML = data;
 
-                    // البحث عن الصورة المضافة في الـ HTML وربطها لفتح في تبويب جديد
+                    // البحث عن العنصر img وربطها بفتح في تبويب جديد عند الضغط عليها
                     const imgElement = contentDiv.querySelector('img');
                     if (imgElement) {
                         imgElement.onclick = function() {
