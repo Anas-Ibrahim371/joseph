@@ -100,6 +100,7 @@
             margin: 0 auto;
             max-width: 100%;
             height: auto;
+            cursor: pointer; /* Add pointer cursor for images */
         }
 
         #close-image-button {
@@ -121,7 +122,7 @@
     </div>
 
     <div id="image">
-        <img id="mind-map-image" src="" alt="Mind Map" style="display: none;" />
+        <img id="mind-map-image" src="" alt="Mind Map" style="display: none;" onclick="openImageInNewTab()" />
     </div>
 
     <div class="mind-map-options" id="mind-map-options">
@@ -133,10 +134,18 @@
     </div>
 
     <div class="mind-map-images" id="mind-map-images">
-        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true" alt="Mind Map 1" onclick="window.open('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%201st%20mind%20map.JPG', '_blank')" />
-        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true" alt="Mind Map 2" onclick="window.open('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%202%20mind%20map.JPG', '_blank')" />
-        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true" alt="Mind Map 3" onclick="window.open('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/hoseph%203rd%20mind%20map.JPG', '_blank')" />
-        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true" alt="Mind Map 4" onclick="window.open('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg', '_blank')" />
+        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true" target="_blank">
+            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true" alt="Mind Map 1" />
+        </a>
+        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true" target="_blank">
+            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true" alt="Mind Map 2" />
+        </a>
+        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true" target="_blank">
+            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true" alt="Mind Map 3" />
+        </a>
+        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true" target="_blank">
+            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true" alt="Mind Map 4" />
+        </a>
     </div>
 
     <div class="contact-info" id="contact-info">
@@ -181,51 +190,35 @@
         function showMindMap(mapNumber) {
             const imgDiv = document.getElementById('image');
             const img = document.getElementById('mind-map-image');
+            let imgUrl;
+
             switch (mapNumber) {
                 case 1:
-                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true';
+                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true';
                     break;
                 case 2:
-                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true';
+                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true';
                     break;
                 case 3:
-                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true';
+                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true';
                     break;
                 case 4:
-                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true';
+                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true';
                     break;
             }
+
+            img.src = imgUrl;
             imgDiv.style.display = 'block';
             img.style.display = 'block';
+            closeVideo();
             closeMindMapImages();
-            document.getElementById('close-image-button').style.display = 'block';
-        }
-
-        function closeImage() {
-            const imgDiv = document.getElementById('image');
-            const img = document.getElementById('mind-map-image');
-            imgDiv.style.display = 'none';
-            img.style.display = 'none';
-            document.getElementById('close-image-button').style.display = 'none';
         }
 
         function showAllMindMaps() {
-            const allImagesDiv = document.getElementById('mind-map-images');
-            allImagesDiv.style.display = 'block';
+            const imagesDiv = document.getElementById('mind-map-images');
+            imagesDiv.style.display = 'block';
             closeVideo();
             closeImage();
-            document.getElementById('close-image-button').style.display = 'block';
-        }
-
-        function closeMindMapOptions() {
-            const optionsDiv = document.getElementById('mind-map-options');
-            mindMapOpen = false;
-            optionsDiv.style.display = 'none';
-        }
-
-        function closeMindMapImages() {
-            const allImagesDiv = document.getElementById('mind-map-images');
-            allImagesDiv.style.display = 'none';
         }
 
         function closeVideo() {
@@ -234,6 +227,30 @@
             videoOpen = false;
             videoDiv.style.display = 'none';
             iframe.src = '';
+        }
+
+        function closeImage() {
+            const imgDiv = document.getElementById('image');
+            const img = document.getElementById('mind-map-image');
+            imgDiv.style.display = 'none';
+            img.style.display = 'none';
+            imageOpen = false;
+        }
+
+        function closeMindMapOptions() {
+            const optionsDiv = document.getElementById('mind-map-options');
+            optionsDiv.style.display = 'none';
+            mindMapOpen = false;
+        }
+
+        function closeMindMapImages() {
+            const imagesDiv = document.getElementById('mind-map-images');
+            imagesDiv.style.display = 'none';
+        }
+
+        function openImageInNewTab() {
+            const img = document.getElementById('mind-map-image');
+            window.open(img.src, '_blank');
         }
     </script>
 </body>
