@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemistry Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet"> <!-- استخدام خط Rakkas -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet"> <!-- خط مزخرف آخر -->
     <style>
         body {
             background-image: url('https://github.com/Anas-Ibrahim371/joseph/blob/main/Anas_Ibrahim_chemical_euqations_dark_0a46caa6-be68-4ccf-9743-a865bd244bd2.png?raw=true');
@@ -28,11 +28,11 @@
         }
 
         h2 {
-            font-family: 'Rakkas', cursive;
+            font-family: 'Rakkas', cursive; /* استخدام خط Rakkas */
             font-size: 2.5em;
             margin-top: 20px;
-            color: white;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            color: white; /* لون النص */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* تأثير الظل */
         }
 
         button {
@@ -62,9 +62,9 @@
             font-size: 1.5em;
             text-align: left;
             margin-top: 20px;
-            position: fixed;
-            left: 20px;
-            bottom: 20px;
+            position: fixed; /* ثابت في مكانه */
+            left: 20px; /* موضع إلى اليسار */
+            bottom: 20px; /* موضع إلى الأسفل */
         }
 
         .facebook-link {
@@ -92,7 +92,7 @@
         }
 
         #image {
-            position: relative;
+            position: relative; /* لتحديد موقع الزر بالنسبة للصورة */
         }
 
         #image img, .mind-map-images img {
@@ -100,18 +100,17 @@
             margin: 0 auto;
             max-width: 100%;
             height: auto;
-            cursor: pointer; /* Add pointer cursor for images */
         }
 
         #close-image-button {
-            position: relative;
-            z-index: 10;
+            position: relative; /* تحديد الموقع بالنسبة للزر */
+            z-index: 10; /* للتأكد من أنه يظهر فوق المحتوى الآخر */
         }
     </style>
 </head>
 <body>
     <h1>Under supervision of Doctor Joseph Adel</h1>
-    <h2>حاجة لوكس لدفعة اللوكس 2025</h2>
+    <h2>حاجة لوكس لدفعة اللوكس 2025</h2> <!-- جملة بخط مزخرف -->
     <button onclick="toggleVideo()">Card Game</button>
     <button onclick="closeImage()" style="display: none;" id="close-image-button">Close Image</button>
     <button onclick="toggleMindMaps()">Mind Maps</button>
@@ -122,7 +121,7 @@
     </div>
 
     <div id="image">
-        <img id="mind-map-image" src="" alt="Mind Map" style="display: none;" onclick="openImageInNewTab()" />
+        <img id="mind-map-image" src="" alt="Mind Map" style="display: none;" />
     </div>
 
     <div class="mind-map-options" id="mind-map-options">
@@ -134,18 +133,10 @@
     </div>
 
     <div class="mind-map-images" id="mind-map-images">
-        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true" target="_blank">
-            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true" alt="Mind Map 1" />
-        </a>
-        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true" target="_blank">
-            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true" alt="Mind Map 2" />
-        </a>
-        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true" target="_blank">
-            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true" alt="Mind Map 3" />
-        </a>
-        <a href="https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true" target="_blank">
-            <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true" alt="Mind Map 4" />
-        </a>
+        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true" alt="Mind Map 1" />
+        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true" alt="Mind Map 2" />
+        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true" alt="Mind Map 3" />
+        <img src="https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true" alt="Mind Map 4" />
     </div>
 
     <div class="contact-info" id="contact-info">
@@ -169,64 +160,53 @@
             videoOpen = !videoOpen;
             videoDiv.style.display = videoOpen ? 'block' : 'none';
             closeMindMapOptions();
-            closeImage();
+            closeImage(); // Close any open image when opening video
 
             if (videoOpen) {
+                // Load the video when opening
                 iframe.src = 'https://player.vimeo.com/video/1017895560?h=34cb5cb6bc';
             } else {
-                iframe.src = '';
+                iframe.src = ''; // Stop the video when closing
             }
         }
 
         function toggleMindMaps() {
             const optionsDiv = document.getElementById('mind-map-options');
             mindMapOpen = !mindMapOpen;
-            optionsDiv.style.display = mindMapOpen ? 'block' : 'none';
+            optionsDiv.style.display = mindMapOpen ? 'block' : 'none'; // Show or hide mind map options
             closeVideo();
-            closeImage();
-            closeMindMapImages();
+            closeImage(); // Close image when switching to mind maps
+            closeMindMapImages(); // Close all mind map images when opening mind maps
         }
 
         function showMindMap(mapNumber) {
             const imgDiv = document.getElementById('image');
             const img = document.getElementById('mind-map-image');
-            let imgUrl;
-
             switch (mapNumber) {
                 case 1:
-                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true';
+                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%201st%20mind%20map.JPG?raw=true';
                     break;
                 case 2:
-                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true';
+                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/joseph%202%20mind%20map.JPG?raw=true';
                     break;
                 case 3:
-                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true';
+                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true';
                     break;
                 case 4:
-                    imgUrl = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true';
+                    img.src = 'https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true';
                     break;
             }
-
-            img.src = imgUrl;
             imgDiv.style.display = 'block';
             img.style.display = 'block';
-            closeVideo();
-            closeMindMapImages();
+            closeMindMapImages(); // Close all mind map images when showing a specific one
+            document.getElementById('close-image-button').style.display = 'inline-block'; // Show the close button
         }
 
         function showAllMindMaps() {
-            const imagesDiv = document.getElementById('mind-map-images');
-            imagesDiv.style.display = 'block';
-            closeVideo();
-            closeImage();
-        }
-
-        function closeVideo() {
-            const videoDiv = document.getElementById('video');
-            const iframe = document.getElementById('video-iframe');
-            videoOpen = false;
-            videoDiv.style.display = 'none';
-            iframe.src = '';
+            const imgDiv = document.getElementById('mind-map-images');
+            imgDiv.style.display = 'block';
+            closeMindMapOptions(); // Close mind map options when showing all
+            document.getElementById('close-image-button').style.display = 'inline-block'; // Show the close button
         }
 
         function closeImage() {
@@ -234,23 +214,27 @@
             const img = document.getElementById('mind-map-image');
             imgDiv.style.display = 'none';
             img.style.display = 'none';
-            imageOpen = false;
+            document.getElementById('close-image-button').style.display = 'none'; // Hide the close button
+            closeMindMapImages(); // Close all mind map images
         }
 
         function closeMindMapOptions() {
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = 'none';
-            mindMapOpen = false;
+            mindMapOpen = false; // Reset mind map open state
         }
 
         function closeMindMapImages() {
-            const imagesDiv = document.getElementById('mind-map-images');
-            imagesDiv.style.display = 'none';
+            const imgDiv = document.getElementById('mind-map-images');
+            imgDiv.style.display = 'none';
         }
 
-        function openImageInNewTab() {
-            const img = document.getElementById('mind-map-image');
-            window.open(img.src, '_blank');
+        function closeVideo() {
+            const videoDiv = document.getElementById('video');
+            const iframe = document.getElementById('video-iframe');
+            videoDiv.style.display = 'none';
+            videoOpen = false; // Reset video open state
+            iframe.src = ''; // Stop the video
         }
     </script>
 </body>
