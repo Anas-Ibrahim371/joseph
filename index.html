@@ -116,14 +116,23 @@
     </div>
 
     <script>
+        let isVideoOpen = false; // متغير لتتبع ما إذا كان الفيديو مفتوحًا أم لا
+
         function loadContent(page) {
             const contentDiv = document.getElementById('content');
+            if (isVideoOpen) {
+                contentDiv.innerHTML = ''; // إفراغ المحتوى إذا كان الفيديو مفتوحًا
+                isVideoOpen = false; // تحديث حالة الفيديو
+            }
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
                     contentDiv.innerHTML = data; // وضع المحتوى المحمّل في div
                     contentDiv.style.display = 'block'; // عرض المحتوى
                     window.history.pushState({page: page}, '', page); // تحديث عنوان URL
+                    if (page === 'video.html') {
+                        isVideoOpen = true; // تحديث حالة الفيديو
+                    }
                 })
                 .catch(error => console.error('Error loading the page:', error));
         }
@@ -145,6 +154,11 @@
         function toggleMindMaps() {
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
+
+            // إغلاق الفيديو إذا كان مفتوحًا
+            if (isVideoOpen) {
+                loadContent(''); // إفراغ المحتوى
+            }
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
