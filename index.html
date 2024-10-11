@@ -55,6 +55,7 @@
 
         #content {
             margin-top: 20px;
+            display: none; /* إخفاء المحتوى بشكل افتراضي */
         }
 
         .contact-info {
@@ -80,21 +81,22 @@
             height: 30px;
             margin-right: 10px;
         }
-
-        img {
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <h1>Under supervision of Doctor Joseph Adel</h1>
     <h2>حاجة لوكس لدفعة اللوكس 2025</h2>
 
-    <button onclick="loadContent('fe-mind-map.html', 'https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%201st%20mind%20map.JPG')">Fe Mind Map</button>
-    <button onclick="loadContent('feo-mind-map.html', 'https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%202%20mind%20map.JPG')">FeO Mind Map</button>
-    <button onclick="loadContent('fe3o4-mind-map.html', 'https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/hoseph%203rd%20mind%20map.JPG')">Fe3O4 Mind Map</button>
-    <button onclick="loadContent('fe2o3-mind-map.html', 'https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg')">Fe2O3 Mind Map</button>
-    <button onclick="loadContent('all-mind-maps.html')">Show All Mind Maps</button>
+    <button onclick="loadContent('video.html')">Card Game</button>
+    <button onclick="toggleMindMaps()">Mind Maps</button>
+    
+    <div id="mindMapOptions" style="display:none;">
+        <button onclick="loadMindMap('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%201st%20mind%20map.JPG')">Fe Mind Map</button>
+        <button onclick="loadMindMap('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/joseph%202%20mind%20map.JPG')">FeO Mind Map</button>
+        <button onclick="loadMindMap('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/hoseph%203rd%20mind%20map.JPG')">Fe3O4 Mind Map</button>
+        <button onclick="loadMindMap('https://raw.githubusercontent.com/Anas-Ibrahim371/joseph/refs/heads/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg')">Fe2O3 Mind Map</button>
+        <button onclick="loadContent('all-mind-maps.html')">Show All Mind Maps</button>
+    </div>
 
     <div id="content"></div> <!-- مكان لتحميل المحتوى -->
 
@@ -109,27 +111,58 @@
     </div>
 
     <script>
-        function loadContent(page, imageUrl) {
+        function loadContent(page) {
             const contentDiv = document.getElementById('content');
-            
-            // جلب محتوى HTML للصورة المطلوبة
+            const mindMapOptions = document.getElementById('mindMapOptions');
+
+            // إخفاء محتوى المايند مابس عند الانتقال
+            // mindMapOptions.style.display = 'none'; // تمت إزالة هذه السطر ليبقى الخيارات ظاهرة
+
+            // إخفاء المحتوى الحالي
+            contentDiv.style.display = 'none';
+
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
-                    contentDiv.innerHTML = data;
-
-                    // البحث عن العنصر img وربطها بفتح في تبويب جديد عند الضغط عليها
-                    const imgElement = contentDiv.querySelector('img');
-                    if (imgElement) {
-                        imgElement.onclick = function() {
-                            window.open(imageUrl, '_blank');
-                        }
-                    }
-
+                    contentDiv.innerHTML = data; // وضع المحتوى المحمّل في div
                     contentDiv.style.display = 'block'; // عرض المحتوى
+                    window.history.pushState({page: page}, '', page); // تحديث عنوان URL
                 })
                 .catch(error => console.error('Error loading the page:', error));
         }
+
+        function toggleMindMaps() {
+            const mindMapOptions = document.getElementById('mindMapOptions');
+            const contentDiv = document.getElementById('content');
+
+            // إخفاء محتوى الفيديو إذا كان معروضاً
+            contentDiv.style.display = 'none';
+
+            if (mindMapOptions.style.display === 'none') {
+                mindMapOptions.style.display = 'block'; // إظهار اختيارات Mind Maps
+            } else {
+                mindMapOptions.style.display = 'block'; // ابق خيارات Mind Maps ظاهرة
+            }
+        }
+
+        // وظيفة لتحميل المايند ماب وفتح الصورة في تبويب جديد
+        function loadMindMap(imageUrl) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `<img src="${imageUrl}" onclick="openImageInNewTab('${imageUrl}')" style="cursor: pointer; max-width: 100%; height: auto;" />`;
+            contentDiv.style.display = 'block'; // عرض المحتوى
+        }
+
+        // وظيفة لفتح الصور في تبويب جديد
+        function openImageInNewTab(imageUrl) {
+            window.open(imageUrl, '_blank'); // فتح الصورة في تبويب جديد
+        }
+
+        // إعادة تحميل المحتوى عند استخدام زر العودة
+        window.onpopstate = function(event) {
+            if (event.state) {
+                loadContent(event.state.page);
+            }
+        };
     </script>
 </body>
 </html>
