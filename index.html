@@ -140,7 +140,6 @@
                     window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
                 })
                 .catch(error => console.error('Error loading the page:', error));
-            hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
         }
 
         function toggleMindMaps() {
@@ -153,11 +152,6 @@
             const contentDiv = document.getElementById('content');
             contentDiv.style.display = 'none'; // إخفاء أي محتوى معروض
             contentDiv.innerHTML = ''; // إفراغ المحتوى
-        }
-
-        function hideMindMapOptions() {
-            const optionsDiv = document.getElementById('mind-map-options');
-            optionsDiv.style.display = 'none'; // إخفاء خيارات الخرائط الذهنية
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
