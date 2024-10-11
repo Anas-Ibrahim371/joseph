@@ -92,15 +92,15 @@
     <h1>Under supervision of Doctor Joseph Adel</h1>
     <h2>حاجة لوكس لدفعة اللوكس 2025</h2>
 
-    <button onclick="loadContent('video.html')">Card Game</button>
+    <button onclick="resetPage('video.html')">Card Game</button>
     <button onclick="toggleMindMaps()">Mind Map</button>
 
     <div id="mind-map-options">
-        <button onclick="loadContent('fe-mind-map.html')">Fe Mind Map</button>
-        <button onclick="loadContent('feo-mind-map.html')">FeO Mind Map</button>
-        <button onclick="loadContent('fe3o4-mind-map.html')">Fe3O4 Mind Map</button>
-        <button onclick="loadContent('fe2o3-mind-map.html')">Fe2O3 Mind Map</button>
-        <button onclick="loadContent('all-mind-maps.html')">Show All Mind Maps</button>
+        <button onclick="resetPage('fe-mind-map.html')">Fe Mind Map</button>
+        <button onclick="resetPage('feo-mind-map.html')">FeO Mind Map</button>
+        <button onclick="resetPage('fe3o4-mind-map.html')">Fe3O4 Mind Map</button>
+        <button onclick="resetPage('fe2o3-mind-map.html')">Fe2O3 Mind Map</button>
+        <button onclick="resetPage('all-mind-maps.html')">Show All Mind Maps</button>
     </div>
 
     <div id="content"></div> <!-- مكان لتحميل المحتوى -->
@@ -116,17 +116,8 @@
     </div>
 
     <script>
-        function loadContent(page) {
-            const contentDiv = document.getElementById('content');
-            contentDiv.style.display = 'none'; // إخفاء المحتوى الحالي عند تحميل محتوى جديد
-            fetch(page)
-                .then(response => response.text())
-                .then(data => {
-                    contentDiv.innerHTML = data; // وضع المحتوى المحمّل في div
-                    contentDiv.style.display = 'block'; // عرض المحتوى
-                    window.history.pushState({page: page}, '', page); // تحديث عنوان URL
-                })
-                .catch(error => console.error('Error loading the page:', error));
+        function resetPage(page) {
+            window.location.href = page; // إعادة توجيه إلى الصفحة المحددة
         }
 
         // إظهار/إخفاء خيارات الخرائط الذهنية
@@ -140,13 +131,6 @@
             const contentDiv = document.getElementById('content');
             contentDiv.style.display = 'none'; // إخفاء أي محتوى معروض
         }
-
-        // إعادة تحميل المحتوى عند استخدام زر العودة
-        window.onpopstate = function(event) {
-            if (event.state) {
-                loadContent(event.state.page);
-            }
-        };
     </script>
 </body>
 </html>
