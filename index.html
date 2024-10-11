@@ -116,8 +116,11 @@
     </div>
 
     <script>
+        let currentPage = ''; // متغير لتتبع الصفحة الحالية
+
         function loadContent(page) {
             const contentDiv = document.getElementById('content');
+            clearContent(); // إخفاء أي محتوى قبل تحميل الجديد
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
@@ -136,6 +139,7 @@
                     });
 
                     window.history.pushState({page: page}, '', page); // تحديث عنوان URL بعد تحميل المحتوى
+                    currentPage = page; // تحديث الصفحة الحالية
                 })
                 .catch(error => console.error('Error loading the page:', error));
         }
@@ -151,6 +155,8 @@
             const contentDiv = document.getElementById('content');
             contentDiv.style.display = 'none'; // إخفاء المحتوى الحالي
             contentDiv.innerHTML = ''; // تفريغ المحتوى
+            currentPage = ''; // إعادة تعيين الصفحة الحالية
+            window.history.pushState({}, '', '/'); // إعادة تعيين الرابط إلى الرابط الأساسي
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
