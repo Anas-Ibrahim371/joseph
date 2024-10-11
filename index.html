@@ -118,6 +118,10 @@
     <script>
         function loadContent(page) {
             const contentDiv = document.getElementById('content');
+
+            // إيقاف الفيديو عند الانتقال إلى صفحة أخرى
+            stopVideo();
+
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
@@ -138,6 +142,15 @@
                     window.history.pushState({page: page}, '', page); // تحديث عنوان URL بعد تحميل المحتوى
                 })
                 .catch(error => console.error('Error loading the page:', error));
+        }
+
+        function stopVideo() {
+            const contentDiv = document.getElementById('content');
+            const videos = contentDiv.getElementsByTagName('video');
+            if (videos.length > 0) {
+                videos[0].pause(); // إيقاف الفيديو
+                videos[0].currentTime = 0; // إعادة تشغيل الفيديو من البداية
+            }
         }
 
         // إظهار/إخفاء خيارات الخرائط الذهنية
