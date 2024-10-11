@@ -91,10 +91,10 @@
     <button onclick="toggleMindMaps()">Mind Maps</button>
     
     <div id="mindMapOptions" style="display:none;">
-        <button onclick="loadMindMap('fe-mindmap.html')">Fe Mind Map</button>
-        <button onclick="loadMindMap('feo-mindmap.html')">FeO Mind Map</button>
-        <button onclick="loadMindMap('fe3o4-mindmap.html')">Fe3O4 Mind Map</button>
-        <button onclick="loadMindMap('fe2o3-mindmap.html')">Fe2O3 Mind Map</button>
+        <button onclick="loadContent('fe-mind-map.html')">Fe Mind Map</button>
+        <button onclick="loadContent('feo-mind-map.html')">FeO Mind Map</button>
+        <button onclick="loadContent('fe3o4-mind-map.html')">Fe3O4 Mind Map</button>
+        <button onclick="loadContent('fe2o3-mind-map.html')">Fe2O3 Mind Map</button>
         <button onclick="loadContent('all-mind-maps.html')">Show All Mind Maps</button>
     </div>
 
@@ -115,8 +115,9 @@
             const contentDiv = document.getElementById('content');
             const mindMapOptions = document.getElementById('mindMapOptions');
 
-            // إخفاء المحتوى الحالي
+            // إخفاء محتوى الفيديو إذا كان معروضاً
             contentDiv.style.display = 'none';
+            mindMapOptions.style.display = 'none';
 
             fetch(page)
                 .then(response => response.text())
@@ -138,23 +139,8 @@
             if (mindMapOptions.style.display === 'none') {
                 mindMapOptions.style.display = 'block'; // إظهار اختيارات Mind Maps
             } else {
-                mindMapOptions.style.display = 'block'; // ابق خيارات Mind Maps ظاهرة
+                mindMapOptions.style.display = 'none'; // إخفاء اختيارات Mind Maps
             }
-        }
-
-        // وظيفة لتحميل المايند ماب من ملف HTML الخاص بها
-        function loadMindMap(page) {
-            const contentDiv = document.getElementById('content');
-            contentDiv.style.display = 'none'; // إخفاء المحتوى الحالي
-
-            // جلب المحتوى من ملف الـ HTML الخاص بالصورة
-            fetch(page)
-                .then(response => response.text())
-                .then(data => {
-                    contentDiv.innerHTML = data; // عرض الصورة من ملف الـ HTML
-                    contentDiv.style.display = 'block'; // عرض المحتوى
-                })
-                .catch(error => console.error('Error loading the mind map:', error));
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
