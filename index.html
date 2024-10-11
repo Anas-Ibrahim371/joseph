@@ -118,7 +118,6 @@
     <script>
         function loadContent(page) {
             const contentDiv = document.getElementById('content');
-            contentDiv.style.display = 'none'; // إخفاء محتوى الفيديو
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
@@ -130,14 +129,16 @@
         }
 
         function loadMindMap(url) {
+            const imgElement = document.createElement('img');
+            imgElement.src = url;
+            imgElement.onclick = function() {
+                window.open(url, '_blank'); // فتح الصورة في تبويب جديد
+            };
             const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = `<img src="${url}" alt="Mind Map" style="max-width: 100%; cursor: pointer;" onclick="openInNewTab('${url}')">`;
-            contentDiv.style.display = 'block'; // عرض الصورة
+            contentDiv.innerHTML = ''; // إفراغ المحتوى السابق
+            contentDiv.appendChild(imgElement); // إضافة الصورة الجديدة
+            contentDiv.style.display = 'block'; // عرض المحتوى
             window.history.pushState({page: url}, '', url); // تحديث عنوان URL
-        }
-
-        function openInNewTab(url) {
-            window.open(url, '_blank'); // فتح الصورة في تبويب جديد
         }
 
         // إظهار/إخفاء خيارات الخرائط الذهنية
