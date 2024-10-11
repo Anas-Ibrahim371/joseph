@@ -145,7 +145,13 @@
         function toggleMindMaps() {
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
-            // لا نحتاج إلى إخفاء المحتوى الحالي عند التبديل إلى خيارات الخرائط الذهنية
+            hideContent(); // إخفاء المحتوى الحالي عند التبديل إلى خيارات الخرائط الذهنية
+        }
+
+        function hideContent() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.style.display = 'none'; // إخفاء أي محتوى معروض
+            contentDiv.innerHTML = ''; // إفراغ المحتوى
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
