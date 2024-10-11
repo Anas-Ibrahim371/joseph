@@ -135,7 +135,7 @@
                         link.appendChild(img);
                     });
 
-                    window.history.pushState({page: page}, '', page); // تحديث عنوان URL
+                    window.history.pushState({page: page}, '', page); // تحديث عنوان URL بعد تحميل المحتوى
                 })
                 .catch(error => console.error('Error loading the page:', error));
         }
