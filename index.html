@@ -116,16 +116,8 @@
     </div>
 
     <script>
-        // استرجاع الصفحة المحفوظة من localStorage
-        window.onload = function() {
-            const savedPage = localStorage.getItem('currentPage');
-            if (savedPage) {
-                window.location.href = savedPage; // إعادة توجيه إلى الصفحة المحفوظة
-            }
-        };
-
         function resetPage(page) {
-            localStorage.setItem('currentPage', page); // حفظ الصفحة الحالية
+            hideContent(); // إخفاء أي محتوى معروض عند الانتقال إلى صفحة جديدة
             window.location.href = page; // إعادة توجيه إلى الصفحة المحددة
         }
 
