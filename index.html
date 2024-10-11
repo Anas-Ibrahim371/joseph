@@ -92,15 +92,15 @@
     <h1>Under supervision of Doctor Joseph Adel</h1>
     <h2>حاجة لوكس لدفعة اللوكس 2025</h2>
 
-    <button onclick="loadContent('video.html')">Card Game</button>
+    <button onclick="loadContent('video.html', 'video')">Card Game</button>
     <button onclick="toggleMindMaps()">Mind Map</button>
 
     <div id="mind-map-options">
-        <button onclick="loadContent('fe-mind-map.html')">Fe Mind Map</button>
-        <button onclick="loadContent('feo-mind-map.html')">FeO Mind Map</button>
-        <button onclick="loadContent('fe3o4-mind-map.html')">Fe3O4 Mind Map</button>
-        <button onclick="loadContent('fe2o3-mind-map.html')">Fe2O3 Mind Map</button>
-        <button onclick="loadContent('all-mind-maps.html')">Show All Mind Maps</button>
+        <button onclick="loadContent('fe-mind-map.html', 'fe')">Fe Mind Map</button>
+        <button onclick="loadContent('feo-mind-map.html', 'feo')">FeO Mind Map</button>
+        <button onclick="loadContent('fe3o4-mind-map.html', 'fe3o4')">Fe3O4 Mind Map</button>
+        <button onclick="loadContent('fe2o3-mind-map.html', 'fe2o3')">Fe2O3 Mind Map</button>
+        <button onclick="loadContent('all-mind-maps.html', 'all')">Show All Mind Maps</button>
     </div>
 
     <div id="content"></div> <!-- مكان لتحميل المحتوى -->
@@ -116,16 +116,14 @@
     </div>
 
     <script>
-        function loadContent(page) {
+        function loadContent(page, id) {
             const contentDiv = document.getElementById('content');
-            clearContent(); // إخفاء أي محتوى قبل تحميل الجديد
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
                     contentDiv.innerHTML = data;
                     contentDiv.style.display = 'block';
 
-                    // إذا كانت هناك صور في المحتوى، نلفها بعنصر <a> لفتحها في تبويب جديد
                     const images = contentDiv.querySelectorAll('img');
                     images.forEach(img => {
                         const imgSrc = img.src;
@@ -136,7 +134,7 @@
                         link.appendChild(img);
                     });
 
-                    window.history.pushState({}, '', ''); // تحديث عنوان URL إلى فارغ
+                    window.history.pushState({page: page}, '', window.location.origin + '/' + id); // تحديث URL
                 })
                 .catch(error => console.error('Error loading the page:', error));
         }
@@ -145,19 +143,14 @@
         function toggleMindMaps() {
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
-            clearContent(); // إخفاء أي محتوى معروض عند التبديل إلى خيارات الخرائط الذهنية
-        }
-
-        function clearContent() {
-            const contentDiv = document.getElementById('content');
-            contentDiv.style.display = 'none'; // إخفاء المحتوى الحالي
-            contentDiv.innerHTML = ''; // تفريغ المحتوى
-            window.history.pushState({}, '', ''); // إعادة تعيين الرابط إلى فارغ
+            window.history.pushState({}, '', window.location.origin + '#mindmap'); // تحديث URL عند عرض الخرائط الذهنية
         }
 
         // إعادة تحميل المحتوى عند استخدام زر العودة
         window.onpopstate = function(event) {
-            clearContent(); // تفريغ المحتوى إذا لم يكن هناك حالة
+            if (event.state) {
+                loadContent(event.state.page);
+            }
         };
     </script>
 </body>
