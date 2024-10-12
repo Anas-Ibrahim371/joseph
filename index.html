@@ -147,7 +147,10 @@
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
             hideContent(); // إخفاء المحتوى الحالي عند التبديل إلى خيارات الخرائط الذهنية
-            window.location.hash = "MindMap"; // تغيير الـ URL عند الضغط على زر Mind Map
+            
+            // تغيير الـ URL عند الضغط على زر Mind Map
+            const newHash = optionsDiv.style.display === 'block' ? '#MindMap' : '';
+            window.history.pushState({}, 'Mind Map', `https://anas-ibrahim371.github.io/joseph/${newHash}`);
         }
 
         function hideContent() {
@@ -188,6 +191,11 @@
 
         // تشغيل دالة فحص الـ hash عند تحميل الصفحة
         window.onload = loadContentFromHash;
+
+        // ضبط حدث عند استخدام زر الرجوع في المتصفح
+        window.onpopstate = function(event) {
+            loadContentFromHash();
+        };
     </script>
 </body>
 </html>
