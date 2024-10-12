@@ -195,6 +195,11 @@
         // ضبط حدث عند استخدام زر الرجوع في المتصفح
         window.onpopstate = function(event) {
             loadContentFromHash();
+            if (event.state) {
+                // عند استخدام زر الرجوع، يتم إعادة تحميل المحتوى بناءً على الحالة
+                const contentDiv = document.getElementById('content');
+                contentDiv.style.display = 'block';
+            }
         };
     </script>
 </body>
