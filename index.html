@@ -165,17 +165,32 @@
         function loadContentFromHash() {
             const hash = window.location.hash; // الحصول على الـ hash من URL
 
-            // إذا كان الـ hash يتضمن أي من الخرائط الذهنية، حوله إلى الرابط المباشر للصورة
-            if (hash === '#Fe3O4 Mind Map') {
-                window.location.href = 'https://anas-ibrahim371.github.io/joseph/#image:hoseph%203rd%20mind%20map';
-            } else if (hash === '#Fe2O3 Mind Map') {
-                window.location.href = 'https://anas-ibrahim371.github.io/joseph/#image:WhatsApp%20Image';
-            } else if (hash === '#Fe Mind Map') {
-                window.location.href = 'https://anas-ibrahim371.github.io/joseph/#image:joseph%201st%20mind%20map';
-            } else if (hash === '#FeO Mind Map') {
-                window.location.href = 'https://anas-ibrahim371.github.io/joseph/#image:joseph%202%20mind%20map';
+            // لو الرابط يحتوي على الصورة، يتم فتحها مباشرة
+            if (hash.startsWith('#image:')) {
+                toggleMindMaps(); // افتح خيارات الـ Mind Map
+
+                // تحديد الصورة المطلوبة بناءً على الرابط
+                const imageUrl = hash.replace('#image:', '');
+                
+                if (imageUrl.includes('joseph%201st%20mind%20map')) {
+                    loadContent('fe-mind-map.html', 'Fe Mind Map');
+                } else if (imageUrl.includes('joseph%202%20mind%20map')) {
+                    loadContent('feo-mind-map.html', 'FeO Mind Map');
+                } else if (imageUrl.includes('hoseph%203rd%20mind%20map')) {
+                    loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
+                } else if (imageUrl.includes('WhatsApp%20Image')) {
+                    loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
+                }
             } else if (hash === '#Video') {
                 loadContent('video.html', 'Video');
+            } else if (hash === '#Fe Mind Map') {
+                loadContent('fe-mind-map.html', 'Fe Mind Map');
+            } else if (hash === '#FeO Mind Map') {
+                loadContent('feo-mind-map.html', 'FeO Mind Map');
+            } else if (hash === '#Fe3O4 Mind Map') {
+                loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
+            } else if (hash === '#Fe2O3 Mind Map') {
+                loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
             } else if (hash === '#All Mind Maps') {
                 loadContent('all-mind-maps.html', 'All Mind Maps');
             } else if (hash === '#MindMap') {
