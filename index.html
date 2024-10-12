@@ -164,8 +164,14 @@
         function loadContentFromHash() {
             const hash = window.location.hash; // الحصول على الـ hash من URL
             if (hash.startsWith('#image:')) {
-                const imgSrc = hash.substring(7); // استخراج رابط الصورة
-                loadImage(imgSrc);
+                const imageUrl = hash.replace('#image:', '');
+                const img = new Image();
+                img.src = imageUrl;
+                img.onload = function() {
+                    const contentDiv = document.getElementById('content');
+                    contentDiv.innerHTML = `<a href="${imageUrl}" target="_blank"><img src="${imageUrl}" alt="Mind Map" style="max-width: 100%; height: auto;"></a>`;
+                    contentDiv.style.display = 'block';
+                };
             } else if (hash === '#Video') {
                 loadContent('video.html', 'Video');
             } else if (hash === '#Fe Mind Map') {
@@ -179,14 +185,6 @@
             } else if (hash === '#All Mind Maps') {
                 loadContent('all-mind-maps.html', 'All Mind Maps');
             }
-        }
-
-        // دالة لتحميل الصورة
-        function loadImage(src) {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = `<img src="${src}" alt="Image" style="max-width: 100%; height: auto;">`;
-            contentDiv.style.display = 'block';
-            window.history.pushState({page: src}, 'Image', `https://anas-ibrahim371.github.io/joseph/#image:${src}`);
         }
 
         // التحقق من الـ hash عند تحميل الصفحة
