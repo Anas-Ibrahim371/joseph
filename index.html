@@ -147,11 +147,6 @@
             const optionsDiv = document.getElementById('mind-map-options');
             optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
             hideContent(); // إخفاء المحتوى الحالي عند التبديل إلى خيارات الخرائط الذهنية
-
-            // تحديث الرابط إلى خيارات الخرائط الذهنية
-            if (optionsDiv.style.display === 'block') {
-                window.history.pushState({page: 'mind-maps'}, 'Mind Maps', 'https://anas-ibrahim371.github.io/joseph/#Mind Maps');
-            }
         }
 
         function hideContent() {
@@ -168,7 +163,10 @@
         // دالة لفتح المحتوى بناءً على الـ hash في URL
         function loadContentFromHash() {
             const hash = window.location.hash; // الحصول على الـ hash من URL
-            if (hash === '#Video') {
+            if (hash.startsWith('#image:')) {
+                const imgSrc = hash.substring(7); // استخراج رابط الصورة
+                loadImage(imgSrc);
+            } else if (hash === '#Video') {
                 loadContent('video.html', 'Video');
             } else if (hash === '#Fe Mind Map') {
                 loadContent('fe-mind-map.html', 'Fe Mind Map');
@@ -180,9 +178,15 @@
                 loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
             } else if (hash === '#All Mind Maps') {
                 loadContent('all-mind-maps.html', 'All Mind Maps');
-            } else if (hash === '#Mind Maps') {
-                hideContent(); // إخفاء أي محتوى عند فتح خيارات الخرائط الذهنية
             }
+        }
+
+        // دالة لتحميل الصورة
+        function loadImage(src) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `<img src="${src}" alt="Image" style="max-width: 100%; height: auto;">`;
+            contentDiv.style.display = 'block';
+            window.history.pushState({page: src}, 'Image', `https://anas-ibrahim371.github.io/joseph/#image:${src}`);
         }
 
         // التحقق من الـ hash عند تحميل الصفحة
