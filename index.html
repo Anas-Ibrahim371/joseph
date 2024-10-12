@@ -137,7 +137,7 @@
                     });
 
                     // تعديل الـ URL
-                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
+                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${encodeURIComponent(title)}`);
                 })
                 .catch(error => console.error('Error loading the page:', error));
             hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
@@ -172,13 +172,15 @@
                 // تحديد الصورة المطلوبة بناءً على الرابط
                 const imageUrl = hash.replace('#image:', '');
                 
-                if (imageUrl.includes('joseph%201st%20mind%20map')) {
+                // استخدام encodeURIComponent للتأكد من أن الصورة تفتح بشكل صحيح
+                const decodedUrl = decodeURIComponent(imageUrl);
+                if (decodedUrl.includes('joseph 1st mind map')) {
                     loadContent('fe-mind-map.html', 'Fe Mind Map');
-                } else if (imageUrl.includes('joseph%202%20mind%20map')) {
+                } else if (decodedUrl.includes('joseph 2 mind map')) {
                     loadContent('feo-mind-map.html', 'FeO Mind Map');
-                } else if (imageUrl.includes('hoseph%203rd%20mind%20map')) {
+                } else if (decodedUrl.includes('hoseph 3rd mind map')) {
                     loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
-                } else if (imageUrl.includes('WhatsApp%20Image')) {
+                } else if (decodedUrl.includes('WhatsApp Image')) {
                     loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
                 }
             } else if (hash === '#Video') {
