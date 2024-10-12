@@ -198,15 +198,8 @@
             }
         }
 
-        // دالة لإخفاء المحتوى عند العودة
-        window.onpopstate = function(event) {
-            hideContent(); // إخفاء المحتوى عند الرجوع
-            hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية
-        };
-
-        // تشغيل دالة تحميل المحتوى عند تحميل الصفحة
+        // تشغيل دالة فحص الـ hash عند تحميل الصفحة
         window.onload = loadContentFromHash;
-
     </script>
 </body>
 </html>
