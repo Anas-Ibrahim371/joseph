@@ -167,20 +167,8 @@
 
             // لو الرابط يحتوي على الصورة، يتم فتحها مباشرة
             if (hash.startsWith('#image:')) {
-                toggleMindMaps(); // افتح خيارات الـ Mind Map
-
-                // تحديد الصورة المطلوبة بناءً على الرابط
                 const imageUrl = hash.replace('#image:', '');
-                
-                if (imageUrl.includes('joseph%201st%20mind%20map')) {
-                    loadContent('fe-mind-map.html', 'Fe Mind Map');
-                } else if (imageUrl.includes('joseph%202%20mind%20map')) {
-                    loadContent('feo-mind-map.html', 'FeO Mind Map');
-                } else if (imageUrl.includes('hoseph%203rd%20mind%20map')) {
-                    loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
-                } else if (imageUrl.includes('WhatsApp%20Image')) {
-                    loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
-                }
+                loadImage(imageUrl); // تحميل الصورة مباشرة
             } else if (hash === '#Video') {
                 loadContent('video.html', 'Video');
             } else if (hash === '#Fe Mind Map') {
@@ -188,14 +176,22 @@
             } else if (hash === '#FeO Mind Map') {
                 loadContent('feo-mind-map.html', 'FeO Mind Map');
             } else if (hash === '#Fe3O4 Mind Map') {
-                loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
+                loadImage('https://github.com/Anas-Ibrahim371/joseph/blob/main/hoseph%203rd%20mind%20map.JPG?raw=true');
             } else if (hash === '#Fe2O3 Mind Map') {
-                loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
+                loadImage('https://github.com/Anas-Ibrahim371/joseph/blob/main/WhatsApp%20Image%202024-10-10%20at%205.28.47%20PM.jpeg?raw=true');
             } else if (hash === '#All Mind Maps') {
                 loadContent('all-mind-maps.html', 'All Mind Maps');
             } else if (hash === '#MindMap') {
                 toggleMindMaps(); // عرض الخرائط الذهنية لوحدها
             }
+        }
+
+        function loadImage(imageUrl) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `<img src="${imageUrl}" alt="Mind Map" style="max-width: 100%; height: auto;">`;
+            contentDiv.style.display = 'block'; // عرض الصورة
+            // تعديل الـ URL
+            window.history.pushState({image: imageUrl}, 'Image', `https://anas-ibrahim371.github.io/joseph/#image:${imageUrl}`);
         }
 
         // تشغيل دالة فحص الـ hash عند تحميل الصفحة
