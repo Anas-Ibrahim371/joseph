@@ -160,33 +160,26 @@
             optionsDiv.style.display = 'none'; // إخفاء خيارات الخرائط الذهنية
         }
 
-        // دالة لفتح المحتوى بناءً على الـ hash في URL
-        function loadContentFromHash() {
-            const hash = window.location.hash; // الحصول على الـ hash من URL
-            if (hash === '#Video') {
-                loadContent('video.html', 'Video');
-            } else if (hash === '#Fe Mind Map') {
-                loadContent('fe-mind-map.html', 'Fe Mind Map');
-            } else if (hash === '#FeO Mind Map') {
-                loadContent('feo-mind-map.html', 'FeO Mind Map');
-            } else if (hash === '#Fe3O4 Mind Map') {
-                loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
-            } else if (hash === '#Fe2O3 Mind Map') {
-                loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
-            } else if (hash === '#All Mind Maps') {
-                loadContent('all-mind-maps.html', 'All Mind Maps');
+        // إعادة تحميل المحتوى عند استخدام زر العودة
+        window.onpopstate = function(event) {
+            if (event.state) {
+                loadContent(event.state.page, event.state.title);
             }
+        };
+
+        // جلب الصور مباشرة عند الوصول إلى الرابط
+        function loadDirectImage(imageSrc, title) {
+            const contentDiv = document.getElementById('content');
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.style.maxWidth = '100%';
+            contentDiv.innerHTML = ''; // إفراغ المحتوى قبل تحميل جديد
+            contentDiv.appendChild(img);
+            contentDiv.style.display = 'block';
+
+            // تعديل الـ URL
+            window.history.pushState({page: imageSrc}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
         }
-
-        // التحقق من الـ hash عند تحميل الصفحة
-        window.onload = function() {
-            loadContentFromHash();
-        };
-
-        // تحديث المحتوى عند تغيير الـ hash بدون إعادة تحميل الصفحة
-        window.onhashchange = function() {
-            loadContentFromHash();
-        };
     </script>
 </body>
 </html>
