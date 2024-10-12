@@ -86,6 +86,11 @@
             display: none; /* إخفاء خيارات الخرائط الذهنية بشكل افتراضي */
             margin-top: 10px;
         }
+
+        #image-display {
+            margin-top: 20px;
+            display: none; /* إخفاء عرض الصورة بشكل افتراضي */
+        }
     </style>
 </head>
 <body>
@@ -104,6 +109,7 @@
     </div>
 
     <div id="content"></div> <!-- مكان لتحميل المحتوى -->
+    <div id="image-display"></div> <!-- مكان لعرض الصورة -->
 
     <div class="contact-info">
         For contact:
@@ -118,26 +124,19 @@
     <script>
         function loadContent(page, title) {
             const contentDiv = document.getElementById('content');
+            const imageDiv = document.getElementById('image-display');
             contentDiv.innerHTML = ''; // إفراغ المحتوى قبل تحميل جديد
+            imageDiv.innerHTML = ''; // إفراغ عرض الصورة
+            contentDiv.style.display = 'none'; // إخفاء المحتوى
+            imageDiv.style.display = 'none'; // إخفاء عرض الصورة
             fetch(page)
                 .then(response => response.text())
                 .then(data => {
                     contentDiv.innerHTML = data;
                     contentDiv.style.display = 'block';
 
-                    // إذا كانت هناك صور في المحتوى، نلفها بعنصر <a> لفتحها في تبويب جديد
-                    const images = contentDiv.querySelectorAll('img');
-                    images.forEach(img => {
-                        const imgSrc = img.src;
-                        const link = document.createElement('a');
-                        link.href = imgSrc;
-                        link.target = '_blank'; // فتح الصورة في تبويب جديد
-                        img.parentNode.insertBefore(link, img);
-                        link.appendChild(img);
-                    });
-
                     // تعديل الـ URL
-                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${encodeURIComponent(title)}`);
+                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
                 })
                 .catch(error => console.error('Error loading the page:', error));
             hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
@@ -167,22 +166,12 @@
 
             // لو الرابط يحتوي على الصورة، يتم فتحها مباشرة
             if (hash.startsWith('#image:')) {
-                toggleMindMaps(); // افتح خيارات الـ Mind Map
-
-                // تحديد الصورة المطلوبة بناءً على الرابط
-                const imageUrl = hash.replace('#image:', '');
-                
-                // استخدام encodeURIComponent للتأكد من أن الصورة تفتح بشكل صحيح
-                const decodedUrl = decodeURIComponent(imageUrl);
-                if (decodedUrl.includes('joseph 1st mind map')) {
-                    loadContent('fe-mind-map.html', 'Fe Mind Map');
-                } else if (decodedUrl.includes('joseph 2 mind map')) {
-                    loadContent('feo-mind-map.html', 'FeO Mind Map');
-                } else if (decodedUrl.includes('hoseph 3rd mind map')) {
-                    loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
-                } else if (decodedUrl.includes('WhatsApp Image')) {
-                    loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
-                }
+                const imageName = hash.replace('#image:', ''); // استخراج اسم الصورة
+                const imageUrl = `https://github.com/Anas-Ibrahim371/joseph/blob/main/${imageName}.JPG?raw=true`;
+                const imageDiv = document.getElementById('image-display');
+                imageDiv.innerHTML = `<img src="${imageUrl}" alt="${imageName}" style="width: 100%; max-width: 600px;">`;
+                imageDiv.style.display = 'block'; // عرض الصورة
+                hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية
             } else if (hash === '#Video') {
                 loadContent('video.html', 'Video');
             } else if (hash === '#Fe Mind Map') {
