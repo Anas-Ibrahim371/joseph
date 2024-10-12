@@ -136,9 +136,8 @@
                         link.appendChild(img);
                     });
 
-                    // تعديل الـ URL إلى URL الأساسي عند الضغط على الأزرار
-                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/`);
-
+                    // تعديل الـ URL
+                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
                 })
                 .catch(error => console.error('Error loading the page:', error));
             hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
@@ -190,4 +189,4 @@
         };
     </script>
 </body>
-</html>
+</html> ا
