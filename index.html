@@ -1,185 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemistry Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-image: url('https://github.com/Anas-Ibrahim371/joseph/blob/main/Anas_Ibrahim_chemical_euqations_dark_0a46caa6-be68-4ccf-9743-a865bd244bd2.png?raw=true');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            margin: 0;
+<script>
+    function loadContent(page, title) {
+        const contentDiv = document.getElementById('content');
+        contentDiv.innerHTML = ''; // إفراغ المحتوى قبل تحميل جديد
+        fetch(page)
+            .then(response => response.text())
+            .then(data => {
+                contentDiv.innerHTML = data;
+                contentDiv.style.display = 'block';
+
+                // إذا كانت هناك صور في المحتوى، نلفها بعنصر <a> لفتحها في تبويب جديد
+                const images = contentDiv.querySelectorAll('img');
+                images.forEach(img => {
+                    const imgSrc = img.src;
+                    const link = document.createElement('a');
+                    link.href = imgSrc;
+                    link.target = '_blank'; // فتح الصورة في تبويب جديد
+                    img.parentNode.insertBefore(link, img);
+                    link.appendChild(img);
+                });
+
+                // تعديل الـ URL
+                window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
+            })
+            .catch(error => console.error('Error loading the page:', error));
+        hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
+    }
+
+    // دالة لتشغيل المحتوى عند فتح رابط مباشر
+    function checkDirectLink() {
+        const url = window.location.hash;
+        if (url) {
+            const page = url.substring(1) + '.html'; // استخرج الاسم من الـ URL
+            loadContent(page, url);
         }
+    }
 
-        h1, h2 {
-            background-color: transparent;
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3em;
-        }
-
-        h2 {
-            font-family: 'Rakkas', cursive;
-            font-size: 2.5em;
-            color: white;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        button {
-            background-color: black;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-            font-size: 1em;
-            transition: transform 0.3s ease;
-        }
-
-        button:hover {
-            background-color: gray;
-            transform: scale(1.1);
-        }
-
-        #content {
-            margin-top: 20px;
-            display: none; /* إخفاء المحتوى بشكل افتراضي */
-        }
-
-        .contact-info {
-            color: lightgray;
-            font-size: 1.5em;
-            text-align: left;
-            margin-top: 20px;
-            position: fixed;
-            left: 20px;
-            bottom: 20px;
-        }
-
-        .facebook-link {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-            color: lightgray;
-            font-size: 1.5em;
-        }
-
-        .facebook-link img {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-        }
-
-        #mind-map-options {
-            display: none; /* إخفاء خيارات الخرائط الذهنية بشكل افتراضي */
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Under supervision of Doctor Joseph Adel</h1>
-    <h2>حاجة لوكس لدفعة اللوكس 2025</h2>
-
-    <button onclick="loadContent('video.html', 'Video')">Card Game</button>
-    <button onclick="toggleMindMaps()">Mind Map</button>
-
-    <div id="mind-map-options">
-        <button onclick="loadContent('fe-mind-map.html', 'Fe Mind Map')">Fe Mind Map</button>
-        <button onclick="loadContent('feo-mind-map.html', 'FeO Mind Map')">FeO Mind Map</button>
-        <button onclick="loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map')">Fe3O4 Mind Map</button>
-        <button onclick="loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map')">Fe2O3 Mind Map</button>
-        <button onclick="loadContent('all-mind-maps.html', 'All Mind Maps')">Show All Mind Maps</button>
-    </div>
-
-    <div id="content"></div> <!-- مكان لتحميل المحتوى -->
-
-    <div class="contact-info">
-        For contact:
-        <div class="facebook-link">
-            <a href="https://www.facebook.com/Dr.JosephAdel" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
-                Facebook Page
-            </a>
-        </div>
-    </div>
-
-    <script>
-        function loadContent(page, title) {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = ''; // إفراغ المحتوى قبل تحميل جديد
-            fetch(page)
-                .then(response => response.text())
-                .then(data => {
-                    contentDiv.innerHTML = data;
-                    contentDiv.style.display = 'block';
-
-                    // إذا كانت هناك صور في المحتوى، نلفها بعنصر <a> لفتحها في تبويب جديد
-                    const images = contentDiv.querySelectorAll('img');
-                    images.forEach(img => {
-                        const imgSrc = img.src;
-                        const link = document.createElement('a');
-                        link.href = imgSrc;
-                        link.target = '_blank'; // فتح الصورة في تبويب جديد
-                        img.parentNode.insertBefore(link, img);
-                        link.appendChild(img);
-                    });
-
-                    // تعديل الـ URL
-                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
-                })
-                .catch(error => console.error('Error loading the page:', error));
-            hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
-        }
-
-        function toggleMindMaps() {
-            const optionsDiv = document.getElementById('mind-map-options');
-            optionsDiv.style.display = optionsDiv.style.display === 'none' ? 'block' : 'none';
-            hideContent(); // إخفاء المحتوى الحالي عند التبديل إلى خيارات الخرائط الذهنية
-        }
-
-        function hideContent() {
-            const contentDiv = document.getElementById('content');
-            contentDiv.style.display = 'none'; // إخفاء أي محتوى معروض
-            contentDiv.innerHTML = ''; // إفراغ المحتوى
-        }
-
-        function hideMindMapOptions() {
-            const optionsDiv = document.getElementById('mind-map-options');
-            optionsDiv.style.display = 'none'; // إخفاء خيارات الخرائط الذهنية
-        }
-
-        // إعادة تحميل المحتوى عند استخدام زر العودة
-        window.onpopstate = function(event) {
-            if (event.state) {
-                loadContent(event.state.page, event.state.title);
-            }
-        };
-
-        // جلب الصور مباشرة عند الوصول إلى الرابط
-        function loadDirectImage(imageSrc, title) {
-            const contentDiv = document.getElementById('content');
-            const img = document.createElement('img');
-            img.src = imageSrc;
-            img.style.maxWidth = '100%';
-            contentDiv.innerHTML = ''; // إفراغ المحتوى قبل تحميل جديد
-            contentDiv.appendChild(img);
-            contentDiv.style.display = 'block';
-
-            // تعديل الـ URL
-            window.history.pushState({page: imageSrc}, title, `https://anas-ibrahim371.github.io/joseph/#${title}`);
-        }
-    </script>
-</body>
-</html>
+    window.onload = checkDirectLink; // تحقق من الرابط عند تحميل الصفحة
+</script>
