@@ -131,7 +131,10 @@
                         const imgSrc = img.src;
                         const link = document.createElement('a');
                         link.href = imgSrc;
-                        link.target = '_blank'; // فتح الصورة في تبويب جديد
+                        link.onclick = function(event) {
+                            event.preventDefault();
+                            loadImage(imgSrc); // تحميل الصورة داخل الموقع
+                        };
                         img.parentNode.insertBefore(link, img);
                         link.appendChild(img);
                     });
@@ -141,6 +144,15 @@
                 })
                 .catch(error => console.error('Error loading the page:', error));
             hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
+        }
+
+        function loadImage(imgSrc) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `<img src="${imgSrc}" style="max-width: 100%; height: auto;">`;
+            contentDiv.style.display = 'block';
+
+            // تحديث الـ URL
+            window.history.pushState({page: imgSrc}, imgSrc, `https://anas-ibrahim371.github.io/joseph/#${imgSrc}`);
         }
 
         function toggleMindMaps() {
@@ -175,6 +187,9 @@
                 loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
             } else if (hash === '#All Mind Maps') {
                 loadContent('all-mind-maps.html', 'All Mind Maps');
+            } else {
+                // إذا كان الـ hash هو رابط صورة، نحمل الصورة
+                loadImage(hash.substring(1)); // نحذف الـ # من بداية الرابط
             }
         }
 
@@ -189,4 +204,4 @@
         };
     </script>
 </body>
-</html> ا
+</html>
