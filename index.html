@@ -136,8 +136,8 @@
                         link.appendChild(img);
                     });
 
-                    // تعديل الـ URL مع الحفاظ على حالة الرجوع
-                    window.history.pushState({ page: page }, title, `https://anas-ibrahim371.github.io/joseph/#image:${page}`);
+                    // تعديل الـ URL
+                    window.history.pushState({page: page}, title, `https://anas-ibrahim371.github.io/joseph/#image:${page}`);
                 })
                 .catch(error => console.error('Error loading the page:', error));
             hideMindMapOptions(); // إخفاء خيارات الخرائط الذهنية عند تحميل محتوى جديد
@@ -174,15 +174,15 @@
                 loadContent(page, 'Image');
             } else if (hash === '#Video') {
                 loadContent('video.html', 'Video');
-            } else if (hash === '#Fe Mind Map') {
+            } else if (hash === '#FeMindMap') {
                 loadContent('fe-mind-map.html', 'Fe Mind Map');
-            } else if (hash === '#FeO Mind Map') {
+            } else if (hash === '#FeOMindMap') {
                 loadContent('feo-mind-map.html', 'FeO Mind Map');
-            } else if (hash === '#Fe3O4 Mind Map') {
+            } else if (hash === '#Fe3O4MindMap') {
                 loadContent('fe3o4-mind-map.html', 'Fe3O4 Mind Map');
-            } else if (hash === '#Fe2O3 Mind Map') {
+            } else if (hash === '#Fe2O3MindMap') {
                 loadContent('fe2o3-mind-map.html', 'Fe2O3 Mind Map');
-            } else if (hash === '#All Mind Maps') {
+            } else if (hash === '#AllMindMaps') {
                 loadContent('all-mind-maps.html', 'All Mind Maps');
             } else if (hash === '#MindMap') {
                 toggleMindMaps(); // عرض الخرائط الذهنية لوحدها
@@ -194,11 +194,7 @@
 
         // ضبط حدث عند استخدام زر الرجوع في المتصفح
         window.onpopstate = function(event) {
-            if (event.state) {
-                loadContent(event.state.page, 'Previous Page');
-            } else {
-                hideContent(); // إذا لم يكن هناك حالة سابقة، إخفاء المحتوى
-            }
+            loadContentFromHash();
         };
     </script>
 </body>
