@@ -94,7 +94,7 @@
 
     <button onclick="loadContent('video.html', 'Video')">Card Game</button>
     <button onclick="toggleMindMaps()">Mind Map</button>
-    <button onclick="loadContent('extraction.html', 'Extraction')">Extraction</button> <!-- زر Extraction الجديد -->
+    <button onclick="loadContent('extraction.html', 'Extraction')">Extraction</button> <!-- الزرار الجديد هنا -->
 
     <div id="mind-map-options">
         <button onclick="loadContent('fe-mind-map.html', 'Fe Mind Map')">Fe Mind Map</button>
@@ -184,8 +184,6 @@
                 loadContent(page, 'Image');
             } else if (hash === '#Video') {
                 loadContent('video.html', 'Video');
-            } else if (hash === '#Extraction') {
-                loadContent('extraction.html', 'Extraction'); // تحميل صفحة Extraction
             } else if (hash === '#FeMindMap') {
                 loadContent('fe-mind-map.html', 'Fe Mind Map');
             } else if (hash === '#FeOMindMap') {
@@ -198,6 +196,8 @@
                 loadContent('all-mind-maps.html', 'All Mind Maps');
             } else if (hash === '#MindMap') {
                 toggleMindMaps(); // عرض الخرائط الذهنية لوحدها
+            } else if (hash === '#Extraction') {
+                loadContent('extraction.html', 'Extraction'); // تحميل محتوى الزرار الجديد
             }
         }
 
