@@ -94,7 +94,7 @@
 
     <button onclick="loadContent('video.html', 'Video')">Card Game</button>
     <button onclick="toggleMindMaps()">Mind Map</button>
-    <button onclick="loadContent('extraction_image.html', 'Extraction')">Extraction</button> <!-- زرار Extraction الجديد -->
+    <button onclick="loadContent('extraction_image.html', 'Extraction')">Extraction</button> <!-- زرار Extraction -->
 
     <div id="mind-map-options">
         <button onclick="loadContent('fe-mind-map.html', 'Fe Mind Map')">Fe Mind Map</button>
@@ -204,8 +204,9 @@
 
         // ضبط حدث عند استخدام زر الرجوع في المتصفح
         window.onpopstate = function(event) {
+            hideContent(); // إخفاء المحتوى الحالي
             if (event.state && event.state.page) {
-                loadContent(event.state.page, 'Previous Page');
+                loadContent(event.state.page, 'Previous Page'); // تحميل الصفحة السابقة
             } else {
                 loadContentFromHash(); // إعادة تحميل بناءً على الـ hash
             }
